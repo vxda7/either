@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block body %}
+<form action="" method="post">
+  {% csrf_token %}
+  <input class="form-control" type="text" name="title" value="{{question.title}}">
+  <input class="form-control" type="text" name="contentA" value="{{question.contentA}}">
+  <input class="form-control" type="text" name="contentB" value="{{question.contentB}}">
+  <input class="form-control" type="text" name="urlA" value="{{question.urlA}}">
+  <input class="form-control" type="text" name="urlB" value="{{question.urlB}}">
+  <input class="form-control" type="submit">
+</form>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="jumbotron">
+  <h1 class="display-4">{{question.title}}</h1>
+  <p class="lead">이것은 당신의 선호를 알아보는 자리이다. 나는 너의 좋아하는 그것 알고 싶다.</p>
+  <hr class="my-4">
+  <p>확인 당신의 취향</p>
+  <form method="POST" action="{% url 'pepsi:new' question.id %}">
+    <div class="custom-control custom-radio custom-control-inline">
+      <input type="radio" id="customRadioInline1" name="tags" value="1" class="custom-control-input">
+      <label class="custom-control-label" for="customRadioInline1">{{question.contentA}}</label>
+      <img src="{{question.urlA}}" alt="">
+      <p class="badge badge-warning">{{question.countA}}</p>
+    </div>
+    <div class="custom-control custom-radio custom-control-inline">
+      <input type="radio" id="customRadioInline2" name="tags" value="2" class="custom-control-input">
+      <label class="custom-control-label" for="customRadioInline2">{{question.contentB}}</label>
+      <img src="{{question.urlB}}" alt="">
+      <p class="badge badge-warning">{{question.countB}}</p>
+    </div>
+    <br>
+    <a href="{% url 'pepsi:update' question.id %}" class="btn btn-primary">수정</a>
+    <a href="{% url 'pepsi:delete' question.id %}" class="btn btn-danger">삭제</a>
+</div>
+
+{% csrf_token %}
+<div class="form-group">
+  <label for="exampleFormControlTextarea1">댓글</label>
+  <textarea name="choice" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+</div>
+<input type="submit">
+</form>
+{% for choice in choices %}
+<div class="card">
+  <div class="card-body">
+    {{choice.pick}}
+    {{choice.comment}}
+    <a href="{% url 'pepsi:cd' choice.id %}" class="btn btn-danger">댓글 삭제</a>
+  </div>
+</div>
+{% endfor %}
+
+{% endblock %}
